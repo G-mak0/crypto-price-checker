@@ -1,0 +1,19 @@
+# 🪙 Crypto Price Checker
+
+A simple Python script that compares the current cryptocurrency price with a user-defined threshold and provides price alerts.
+
+## 📌 Features
+
+- 📈 Accepts user input for current crypto price and alert threshold
+- ⚖️ Compares values and returns one of three messages:
+  - Above the threshold (possible sell alert)
+  - Below the threshold (possible buy opportunity)
+  - Equal to the threshold
+
+## 🚀 How to Use
+
+1. Clone this repository or copy the `check_price.py` file.
+2. Run the script in your terminal:
+
+```bash
+python check_price.py
