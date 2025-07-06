@@ -1,19 +1,99 @@
-# 🪙 Crypto Price Checker
+# 💸 Crypto Price Checker
 
-A simple Python script that compares the current cryptocurrency price with a user-defined threshold and provides price alerts.
+A beginner-friendly Python project that checks the **live price of cryptocurrencies** using the CoinGecko API and alerts you when the price crosses your custom threshold.
 
-## 📌 Features
+Supports input like `btc`, `bitcoin`, `eth`, and more. Built with modular code for easy extension.
 
-- 📈 Accepts user input for current crypto price and alert threshold
-- ⚖️ Compares values and returns one of three messages:
-  - Above the threshold (possible sell alert)
-  - Below the threshold (possible buy opportunity)
-  - Equal to the threshold
+---
 
-## 🚀 How to Use
+## 🚀 Features
 
-1. Clone this repository or copy the `check_price.py` file.
-2. Run the script in your terminal:
+- 📈 Get real-time prices for BTC, ETH, DOGE
+- 🧠 Smart input mapping (`btc` → `bitcoin`)
+- 📊 Alerts when price goes above or below your threshold
+- 🧩 Clean and modular design for easy maintenance
 
-```bash
-python check_price.py
+---
+
+## 📂 Project Structure
+
+crypto-price-checker/
+├── check_price_api.py # Main script: user input, API call, alert logic
+├── coin_mapping.py # Maps input symbols (e.g. btc) to CoinGecko IDs
+├── README.md # You're reading it :)
+
+yaml
+Copy
+Edit
+
+---
+
+## 🔧 How to Run
+
+1. Clone the repo or download the files:
+   ```bash
+   git clone https://github.com/G-mak0/crypto-price-checker.git
+   cd crypto-price-checker
+Install required packages:
+
+bash
+Copy
+Edit
+pip install requests
+Run the program:
+
+bash
+Copy
+Edit
+python check_price_api.py
+💰 Supported Coins
+The following input formats are supported:
+
+Input	CoinGecko ID
+btc	bitcoin
+bitcoin	bitcoin
+eth	ethereum
+ethereum	ethereum
+doge	dogecoin
+dogecoin	dogecoin
+
+You can easily expand this by editing coin_mapping.py.
+
+🧠 File Descriptions
+check_price_api.py
+Handles user input (coin symbol, threshold)
+
+Uses get_coin_id() to map input to correct CoinGecko ID
+
+Fetches price using the CoinGecko API
+
+Compares current price with user-defined threshold
+
+Displays buy/sell suggestion based on the result
+
+coin_mapping.py
+Contains the dictionary coin_map for mapping symbols to CoinGecko IDs
+
+Provides get_coin_id(symbol) function to return proper coin ID
+
+Designed to be reusable and easy to expand with more symbols
+
+🧪 Sample Output
+pgsql
+Copy
+Edit
+Enter the coin symbol (btc / eth / doge): btc
+Enter your price alert threshold: 63000
+✅ Current price of Bitcoin: $62,143.55
+📉 Price is below your threshold. Might be a good time to buy.
+🔮 Future Ideas
+Add support for more coins: SOL, BNB, XRP, etc.
+
+Plot real-time price trends using matplotlib
+
+Create a CLI/GUI version
+
+Push alerts via Telegram or Email
+
+Save price logs to CSV or JSON
+
