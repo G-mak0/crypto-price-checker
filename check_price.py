@@ -1,19 +1,48 @@
-# Define a function to check the price against a user-defined threshold
-def check_price(current_price, threshold):
-    if current_price > threshold:
-        return "💡 Current price is above your alert threshold. You might consider selling."
-    elif current_price < threshold:
-        return "📉 Current price is below your threshold. Might be a buying opportunity."
+from Coin_map import get_coin_id
+import requests
+
+
+def get_crypto_price(coin_id='bitcoin', vs_currency='usd'):
+    url = f"https://api.coingecko.com/api/v3/simple/price"
+    params = {
+        'ids': coin_id,
+        'vs_currencies': vs_currency
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+
+    print("DUBUG>>>Raw response:", data)
+    try:
+        price = data[coin_id][vs_currency]
+        return price
+    except KeyError:
+        return None
+
+
+symbol = input("Enter the coin symbol (btc / eth / doge): ").lower()
+coin = get_coin_id(symbol)
+
+if coin is None:
+    print("❌ Unsupported coin symbol. Please enter a valid one.")
+    exit()
+
+
+threshold = float(input("Enter your price alert threshold: "))
+price = get_crypto_price(coin)
+
+if coin is None:
+    print("❌ Unsupported coin symbol. Please enter a valid one.")
+    exit()
+
+
+if price is None:
+    print("❌ could not fetch price. Make sure the coin name is valid.")
+else:
+    print(f"✅ Current price of {coin.capitalize()}: ${price:,}")
+
+    if price > threshold:
+        print("💡 Price is above your threshold. You might consider selling.")
+    elif price < threshold:
+        print("📉 Price is below your threshold. Might be a good time to buy.")
     else:
-        return "⚖️ Current price is exactly equal to your threshold."
-
-
-# Get user input from the terminal
-price = float(input("Enter the current crypto price (e.g. 62800): "))
-limit = float(input("Enter your price alert threshold: "))
-
-# Use the function to get the analysis
-result = check_price(price, limit)
-
-# Print the result
-print(result)
+        print("⚖️ Price is exactly at your threshold.")
