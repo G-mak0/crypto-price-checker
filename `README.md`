@@ -1,26 +1,34 @@
 # 💸 Crypto Price Checker
 
-A beginner-friendly Python project that checks the **live price of cryptocurrencies** using the CoinGecko API and alerts you when the price crosses your custom threshold.
+A beginner-friendly Python project that progressively builds cryptocurrency tools using the [CoinGecko API](https://www.coingecko.com/en/api).
 
-Supports input like `btc`, `bitcoin`, `eth`, and more. Built with modular code for easy extension.
+This repo is structured by **daily learning milestones** and features:
 
----
-
-## 🚀 Features
-
-- 📈 Get real-time prices for BTC, ETH, DOGE
-- 🧠 Smart input mapping (`btc` → `bitcoin`)
-- 📊 Alerts when price goes above or below your threshold
-- 🧩 Clean and modular design for easy maintenance
+- ✅ Real-time price checking
+- ✅ Price threshold alerts
+- ✅ 7-day price trend visualization
+- 🧩 Modular code with reusable mapping functions
 
 ---
 
-## 📂 Project Structure
+## 📅 Learning Progress
+
+| Day | Feature                          | Script                   | Status |
+|-----|----------------------------------|--------------------------|--------|
+| 1   | Real-time price fetch            | `check_price_api.py`    | ✅     |
+| 2   | Price threshold alerts           | `check_price_api.py`    | ✅     |
+| 3   | Price trend chart visualization  | `plot_price_chart.py`   | ✅     |
+| 4+  | (Planned) CSV/JSON saving, bots  | coming soon              | 🔜     |
+
+---
+
+## 📁 Project Structure
 
 crypto-price-checker/
-├── check_price_api.py # Main script: user input, API call, alert logic
-├── coin_mapping.py # Maps input symbols (e.g. btc) to CoinGecko IDs
-├── README.md # You're reading it :)
+├── check_price_api.py # Day 1 & 2: Real-time price check + alerts
+├── plot_price_chart.py # Day 3: 7-day trend visualization
+├── coin_mapping.py # Common mapping utility
+├── README.md # You're reading it!
 
 yaml
 Copy
@@ -28,72 +36,108 @@ Edit
 
 ---
 
-## 🔧 How to Run
+## 🧪 Day 1 – Real-time Price Checker
 
-1. Clone the repo or download the files:
-   ```bash
-   git clone https://github.com/G-mak0/crypto-price-checker.git
-   cd crypto-price-checker
-Install required packages:
+### ✅ Script: `check_price_api.py`
 
-bash
-Copy
-Edit
-pip install requests
-Run the program:
+This script fetches the **current price** of a selected cryptocurrency.
 
-bash
-Copy
-Edit
-python check_price_api.py
-💰 Supported Coins
-The following input formats are supported:
-
-Input	CoinGecko ID
-btc	bitcoin
-bitcoin	bitcoin
-eth	ethereum
-ethereum	ethereum
-doge	dogecoin
-dogecoin	dogecoin
-
-You can easily expand this by editing coin_mapping.py.
-
-🧠 File Descriptions
-check_price_api.py
-Handles user input (coin symbol, threshold)
-
-Uses get_coin_id() to map input to correct CoinGecko ID
-
-Fetches price using the CoinGecko API
-
-Compares current price with user-defined threshold
-
-Displays buy/sell suggestion based on the result
-
-coin_mapping.py
-Contains the dictionary coin_map for mapping symbols to CoinGecko IDs
-
-Provides get_coin_id(symbol) function to return proper coin ID
-
-Designed to be reusable and easy to expand with more symbols
-
-🧪 Sample Output
-pgsql
-Copy
-Edit
+#### Example:
+```bash
 Enter the coin symbol (btc / eth / doge): btc
-Enter your price alert threshold: 63000
 ✅ Current price of Bitcoin: $62,143.55
+📉 Day 2 – Price Alert System
+✅ Script: check_price_api.py (same as Day 1)
+Additions:
+
+Prompts user to input a price threshold
+
+Outputs an alert if current price is:
+
+Higher → ⚠️ Sell suggestion
+
+Lower → 📉 Buy suggestion
+
+Example:
+bash
+Copy
+Edit
+Enter your price alert threshold: 63000
 📉 Price is below your threshold. Might be a good time to buy.
-🔮 Future Ideas
-Add support for more coins: SOL, BNB, XRP, etc.
+📈 Day 3 – Price Trend Visualization (Past 7 Days)
+✅ Script: plot_price_chart.py
+This script fetches and visualizes the last 7 days of price history using matplotlib.
 
-Plot real-time price trends using matplotlib
+How to Run:
+bash
+Copy
+Edit
+python plot_price_chart.py
+What It Does:
+Uses CoinGecko's market_chart API
 
-Create a CLI/GUI version
+Converts timestamp data to readable dates
 
-Push alerts via Telegram or Email
+Draws a line chart with:
 
-Save price logs to CSV or JSON
+X-axis: Dates
+
+Y-axis: Price (USD)
+
+Output Example:
+A chart will pop up like this:
+
+markdown
+Copy
+Edit
+Bitcoin - Price Trend (Last 7 Days)
+o      o      o     o      o      o     o
+------------------------------------------
+  7/08  7/09  7/10  7/11  7/12  7/13  7/14
+🧩 Common Module – coin_mapping.py
+📌 What it does:
+Maps user-friendly inputs like btc, eth to standard CoinGecko IDs like bitcoin, ethereum
+
+Exports a function:
+
+python
+Copy
+Edit
+get_coin_id(symbol)
+That safely converts any alias to the correct API ID.
+
+🧠 Example:
+python
+Copy
+Edit
+get_coin_id("btc") → "bitcoin"
+get_coin_id("eth") → "ethereum"
+💰 Supported Coins
+Input	Mapped to
+btc	bitcoin
+eth	ethereum
+doge	dogecoin
+(more…)	you can add!
+
+You can easily expand this list in coin_mapping.py.
+
+📦 Requirements
+Install dependencies:
+
+bash
+Copy
+Edit
+pip install requests matplotlib
+Tested with Python 3.9+
+
+🔮 Future Plans
+ Day 4 – Export price data to .csv or .json
+
+ Telegram / email alerts
+
+ Multi-coin trend comparisons
+
+ Web UI using Streamlit or Flask
+
+
 
