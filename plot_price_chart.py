@@ -4,7 +4,7 @@ from datetime import datetime
 from Coin_map import get_coin_id
 
 
-def fetch_price_history(coin_id='bitcoin', vs_currency='usd', days=30):
+def fetch_price_history(coin_id='bitcoin', vs_currency='usd', days=7):
     url = f'https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart'
     params = {
         'vs_currency': vs_currency,
@@ -21,7 +21,7 @@ def plot_price_chart(prices, coin_id='bitcoin'):
     values = [p[1] for p in prices]
     plt.figure(figsize=(10, 5))
     plt.plot(dates, values, marker='o', linestyle='-', color='teal')
-    plt.title(f"{coin_id.capitalize()} - Price Trend (Last 30 Days)")
+    plt.title(f"{coin_id.capitalize()} - Price Trend (Last 7 Days)")
     plt.xlabel('Date')
     plt.ylabel('Price(USD)')
     plt.grid(True)
@@ -40,5 +40,5 @@ plot_price_chart(price_history, coin_id)
 
 
 # commit message:
-add plot_price_chart.py for price trend visualization (Day 30)
+add plot_price_chart.py for price trend visualization (Day 7)
 
